@@ -1,13 +1,8 @@
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script type="text/javascript" src="jemoji/jemoji.js"></script>
-<link rel="stylesheet" src="jemoji/jemoji.css"/>
 
-    <h1>Countries and their animals</h1>
-   <script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
-    
+
+    <h1>Twitter</h1>    
     
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -20,13 +15,15 @@
     <!-- This is the HTML form -->
 
    	<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-    	Country: <input type="text" name="country" $('#example').jemoji();>
-    	National animal: <input type="text" name="animal" $('#example').jemoji();>
+    	Tweet: <input type="text" name="country";>
     	<input type="submit" name="submit">
     </form>
-
+    
+        
 	<?php
-
+	require("../../../../Users/Surya.Pandiaraju/Downloads/twitapp/common.php"); ///This should be your directory, the one here is mine
+		$arr = array_values($_SESSION['user']);
+		echo "Welcome " . $arr[2];
 		// set database server access variables:
 		$host = "localhost";
 		$user = "root";
@@ -50,6 +47,9 @@
 
     		// print them one after another
     		echo "<table cellpadding=10 class='table' border=1>";
+			
+		   $query5 = "SELECT * FROM symbols ORDER BY id DESC";
+            $result = mysql_query($query5) or die ("Error in query: $query. ".mysql_error());
     		while($row = mysql_fetch_row($result)) {
 				
         		echo "<tr>";
@@ -72,14 +72,20 @@
 
 		// set variable values to HTML form inputs
 		$country = mysql_escape_string($_POST['country']);
-    	$animal = mysql_escape_string($_POST['animal']);
+		//$username = ;
+		
+  
 		
 		// check to see if user has entered anything
-		if ($animal != "") {
+		if ($country != "") {
+			
+			
 	 		// build SQL query
-			$query = "INSERT INTO symbols (country, animal) VALUES ('$country', '$animal')";
+			$query = "INSERT INTO symbols (tweet, Username) VALUES ('$country', '$arr[2]')";
+		
 			// run the query
      		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
+	
 			// refresh the page to show new update
 	 		echo "<meta http-equiv='refresh' content='0'>";
 		}
@@ -107,8 +113,9 @@
 	?>
     <a type="submit" class="button"> <button type="button" class="btn btn-success">Success</button> <?php
 	$db->query("INSERT INTO table VALUES(8,'two','three')");
+	
 	?></a>
- 
+     <form action="logout.php" method="post"><button>Log out</button></form>
     
 	</body>
 </html>
