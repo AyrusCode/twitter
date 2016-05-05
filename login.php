@@ -117,4 +117,4 @@
     <br /><br /> 
     <input type="submit" value="Login" /> 
 </form> 
-<a href="register.php">Register</a>
+<a href="register.php">Register</a> 
