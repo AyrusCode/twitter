@@ -89,8 +89,8 @@
             $_SESSION['user'] = $row; 
              
             // Redirect the user to the private members-only page. 
-            header("Location: edit.php"); 
-            die("Redirecting to: edit.php"); 
+            header("Location: feed.php"); 
+            die("Redirecting to: feed.php"); 
         } 
         else 
         { 
