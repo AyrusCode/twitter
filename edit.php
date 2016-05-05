@@ -1,121 +1,118 @@
 <html>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
 	<body>
 
+	    <h1>twitter</h1>
 
-    <h1>Twitter</h1>    
-    
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	   	<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+	    	<input type="text" name="tweet";>
+	    	<input type="submit" name="submit" value="tweet">
+	    </form>
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <!-- This is the HTML form -->
+		<?php
+			// pass in some info;
+			require("common.php");
 
-   	<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-    	Tweet: <input type="text" name="country";>
-    	<input type="submit" name="submit">
-    </form>
-    
-        
-	<?php
-	require("../../../../Users/Surya.Pandiaraju/Downloads/twitapp/common.php"); ///This should be your directory, the one here is mine
-		$arr = array_values($_SESSION['user']);
-		echo "Welcome " . $arr[2];
-		// set database server access variables:
-		$host = "localhost";
-		$user = "root";
-		$pass = "root";
-		$db = "testdb";
+			if(empty($_SESSION['user'])) {
 
-		// open connection
-		$connection = mysql_connect($host, $user, $pass) or die ("Unable to connect!");
+				// If they are not, we redirect them to the login page.
+				$location = "http://" . $_SERVER['HTTP_HOST'] . "/login.php";
+				echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+				//exit;
 
-		// select database
-		mysql_select_db($db) or die ("Unable to select database!");
+				// Remember that this die statement is absolutely critical.  Without it,
+				// people can view your members-only content without logging in.
+				die("Redirecting to login.php");
+			}
 
-		// create query
-		$query = "SELECT * FROM symbols";
+			// To access $_SESSION['user'] values put in an array, show user his username
+			$arr = array_values($_SESSION['user']);
+			echo "Welcome " . $arr[1];
+			echo "<br><br>";
 
-		// execute query
-		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
+			// open connection
+			$connection = mysql_connect($host, $rootusername, $rootpassword) or die ("Unable to connect!");
 
-		// see if any rows were returned
-		if (mysql_num_rows($result) > 0) {
+			// select database
+			mysql_select_db($dbname) or die ("Unable to select database!");
 
-    		// print them one after another
-    		echo "<table cellpadding=10 class='table' border=1>";
-			
-		   $query5 = "SELECT * FROM symbols ORDER BY id DESC";
-            $result = mysql_query($query5) or die ("Error in query: $query. ".mysql_error());
-    		while($row = mysql_fetch_row($result)) {
-				
-        		echo "<tr>";
-				echo "<td>".$row[0]."</td>";
-        		echo "<td>" . $row[1]."</td>";
-        		echo "<td>".$row[2]."</td>";
-				echo "<td><a href=".$_SERVER['PHP_SELF']."?id=".$row[0].">Delete</a></td>";
-        		echo "</tr>";
-    		}
-		    echo "</table>";
+			// create query
+			$query = "SELECT * FROM tweets";
 
-		} else {
-			
-    		// print status message
-    		echo "No rows found!";
-		}
+			// execute query
+			$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
 
-		// free result set memory
-		mysql_free_result($result);
+			// see if any rows were returned
+			if (mysql_num_rows($result) > 0) {
 
-		// set variable values to HTML form inputs
-		$country = mysql_escape_string($_POST['country']);
-		//$username = ;
-		
-  
-		
-		// check to see if user has entered anything
-		if ($country != "") {
-			
-			
-	 		// build SQL query
-			$query = "INSERT INTO symbols (tweet, Username) VALUES ('$country', '$arr[2]')";
-		
-			// run the query
-     		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
-	
-			// refresh the page to show new update
-	 		echo "<meta http-equiv='refresh' content='0'>";
-		}
-		
-		// if DELETE pressed, set an id, if id is set then delete it from DB
-		if (isset($_GET['id'])) {
+	    		// print them one after another
+			    $query5 = "SELECT * FROM tweets ORDER BY id DESC";
+	            $result = mysql_query($query5) or die ("Error in query: $query. ".mysql_error());
 
-			// create query to delete record
-			echo $_SERVER['PHP_SELF'];
-    		$query = "DELETE FROM symbols WHERE id = ".$_GET['id'];
+	    		while($row = mysql_fetch_row($result)) {
 
-			// run the query
-     		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
-			
-			// reset the url to remove id $_GET variable
-			$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
-			exit;
-			
-		}
-		
-		// close connection
-		mysql_close($connection);
+					echo "<div class='panel panel-default'>";
+						echo "<div class='panel-heading'>".$row[2]."</div>";
+						echo "<div class='panel-body'>";
+			        		echo "<div>".$row[1]."</div>";
+							echo "<div>".date('F j, g:i a', strtotime($row[3]))."</div>";
+							// DISABLED DELETE FEATURE echo "<div><a href=".$_SERVER['PHP_SELF']."?id=".$row[0].">Delete</a></div>";
+						echo "</div>";
+					echo "</div>";
+	    		}
 
-	?>
-    <a type="submit" class="button"> <button type="button" class="btn btn-success">Success</button> <?php
-	$db->query("INSERT INTO table VALUES(8,'two','three')");
-	
-	?></a>
-     <form action="logout.php" method="post"><button>Log out</button></form>
-    
+			} else {
+
+	    		// print status message
+	    		echo "No rows found!";
+			}
+
+			// free result set memory
+			mysql_free_result($result);
+
+			// set variable values to HTML form inputs
+			$tweet = mysql_escape_string($_POST['tweet']);
+
+			// check to see if user has entered anything
+			if ($tweet != "") {
+
+		 		// build SQL query
+				$query = "INSERT INTO tweets (text, user) VALUES ('$tweet', '$arr[1]')";
+
+				// run the query
+	     		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
+
+				// refresh the page to show new update
+		 		echo "<meta http-equiv='refresh' content='0'>";
+			}
+
+			// DISABLED FEATURE TO REMOVE TWEETS
+			// // if DELETE pressed, set an id, if id is set then delete it from DB
+			// if (isset($_GET['id'])) {
+			//
+			// 	// create query to delete record
+			// 	echo $_SERVER['PHP_SELF'];
+	    	// 	$query = "DELETE FROM symbols WHERE id = ".$_GET['id'];
+			//
+			// 	// run the query
+		    // 		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
+			//
+			// 	// reset the url to remove id $_GET variable
+			// 	$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+			// 	echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+			// 	exit;
+			//
+			// }
+
+			// close connection
+			mysql_close($connection);
+
+		?>
+
+		<br>
+	    <form action="logout.php" method="post"><button>Log out</button></form>
+
 	</body>
 </html>
