@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: May 05, 2016 at 06:14 PM
+-- Generation Time: May 09, 2016 at 07:39 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -25,7 +25,7 @@ CREATE TABLE `tweets` (
   `contents` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `user` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tweets`
@@ -37,7 +37,9 @@ INSERT INTO `tweets` (`id`, `contents`, `user`, `time`) VALUES
 (3, 'Make America Great Again', 'realDonaldTrump', '2016-05-05 03:05:34'),
 (4, 'BLUE JAYS WIN #bluejays #baseball', 'BringerOfRain20', '2016-05-05 03:07:52'),
 (5, 'Hello Geniuses! #geniuses #compsci', 'poopiepants', '2016-05-05 03:27:51'),
-(6, 'Testing Testing #testing #hashtag', 'RedRhino999', '2016-05-05 03:30:57');
+(6, 'Testing Testing #testing #hashtag', 'RedRhino999', '2016-05-05 03:30:57'),
+(7, 'I love hispanics!! #hispanics #taco', 'realDonaldTrump', '2016-05-09 17:29:28'),
+(8, '#lyinted is FINISHED of to the election #shillary', 'realDonaldTrump', '2016-05-09 17:32:21');
 
 -- --------------------------------------------------------
 
@@ -90,7 +92,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tweets`
 --
 ALTER TABLE `tweets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
