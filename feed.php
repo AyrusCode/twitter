@@ -10,20 +10,21 @@
 	    	<input type="submit" name="submit" value="tweet">
 	    </form>
 
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+	    	#<input type="text" name="search";>
+	    	<input type="submit" name="submit" value="search">
+	    </form>
+
 
 		<?php
 			// pass in some info;
 			require("common.php");
 
 			if(empty($_SESSION['user'])) {
-
-				// If they are not, we redirect them to the login page.
+				// If they are not loggd in, we redirect them to the login page.
 				$location = "http://" . $_SERVER['HTTP_HOST'] . "/login.php";
 				echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
 				//exit;
-
-				// Remember that this die statement is absolutely critical.  Without it,
-				// people can view your members-only content without logging in.
 				die("Redirecting to login.php");
 			}
 
@@ -34,12 +35,35 @@
 
 			// open connection
 			$connection = mysql_connect($host, $rootusername, $rootpassword) or die ("Unable to connect!");
-
 			// select database
 			mysql_select_db($dbname) or die ("Unable to select database!");
 
-			// create query
-			$query = "SELECT * FROM tweets";
+			// check for a search
+			$search = mysql_escape_string($_POST['search']);
+
+			// if the user used the form, go to the correct url
+			if (!empty($_POST['search'])) {
+				$location = "http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?search=".$_POST['search'];
+				echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+			}
+
+			// get the search term from the url
+			$search = $_GET["search"];
+
+			// if there is a search term, search for it
+			if (empty($_GET['search']) or isset($_POST['clear'])) {
+				echo "Displaying all tweets <br> <br>";
+				$query = "SELECT * FROM tweets ORDER BY id DESC";
+			} else {
+				// add a hashtag to the search
+				if ($search[0] != "#") {
+				    $search = "#$search";
+				}
+				echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
+					  Searching for ".$search." <input name='clear' type='submit' value='clear'/>
+					  </form>";
+				$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' ORDER BY id DESC";
+			}
 
 			// execute query
 			$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
@@ -48,10 +72,28 @@
 			if (mysql_num_rows($result) > 0) {
 
 	    		// print them one after another
-			    $query5 = "SELECT * FROM tweets ORDER BY id DESC";
-	            $result = mysql_query($query5) or die ("Error in query: $query. ".mysql_error());
+	    		while ($row = mysql_fetch_row($result)) {
+					$tweet = str_split($row[1]);
+					$i = 0;
+					$tags = [];
+					foreach ($tweet as $letter) {
+						if ($letter == "#") {
+							$hashtag = "";
+							foreach (array_slice($tweet, $i) as $hashtagletter) {
+								if ($hashtagletter != " ") {
+									$hashtag = $hashtag.$hashtagletter;
+								} else {
+									break;
+								}
+							}
+							array_push($tags, $hashtag);
+						}
+						$i ++;
+					}
 
-	    		while($row = mysql_fetch_row($result)) {
+					foreach ($tags as $tag) {
+						$row[1] = str_replace($tag, "<a href='http://localhost:8888/twitter/feed.php?search=".trim($tag, "#")."'>".$tag."</a>", $row[1]);
+					}
 
 					echo "<div class='panel panel-default'>";
 						echo "<div class='panel-heading'>".$row[2]."</div>";
@@ -62,28 +104,21 @@
 						echo "</div>";
 					echo "</div>";
 	    		}
-
 			} else {
-
-	    		// print status message
 	    		echo "No rows found!";
 			}
 
 			// free result set memory
 			mysql_free_result($result);
-
 			// set variable values to HTML form inputs
 			$tweet = mysql_escape_string($_POST['tweet']);
 
 			// check to see if user has entered anything
 			if ($tweet != "") {
-
 		 		// build SQL query
-				$query = "INSERT INTO tweets (text, user) VALUES ('$tweet', '$arr[1]')";
-
+				$query = "INSERT INTO tweets (contents, user) VALUES ('$tweet', '$arr[1]')";
 				// run the query
 	     		$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
-
 				// refresh the page to show new update
 		 		echo "<meta http-equiv='refresh' content='0'>";
 			}
