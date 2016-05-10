@@ -1,12 +1,10 @@
 <?php
     // First we execute our common code to connection to the database and start the session
     require("common.php");
-
     // This variable will be used to re-display the user's username to them in the
     // login form if they fail to enter the correct password.  It is initialized here
     // to an empty value, which will be shown if the user has not submitted the form.
     $submitted_username = '';
-
     // This if statement checks to determine whether the login form has been submitted
     // If it has, then the login code is run, otherwise the form is displayed
     if(!empty($_POST))
@@ -24,12 +22,10 @@
             WHERE
                 username = :username
         ";
-
         // The parameter values
         $query_params = array(
             ':username' => $_POST['username']
         );
-
         try
         {
             // Execute the query against the database
@@ -42,12 +38,10 @@
             // It may provide an attacker with helpful information about your code.
             die("Failed to run query: " . $ex->getMessage());
         }
-
         // This variable tells us whether the user has successfully logged in or not.
         // We initialize it to false, assuming they have not.
         // If we determine that they have entered the right details, then we switch it to true.
         $login_ok = false;
-
         // Retrieve the user data from the database.  If $row is false, then the username
         // they entered is not registered.
         $row = $stmt->fetch();
@@ -61,14 +55,12 @@
             {
                 $check_password = hash('sha256', $check_password . $row['salt']);
             }
-
             if($check_password === $row['password'])
             {
                 // If they do, then we flip this to true
                 $login_ok = true;
             }
         }
-
         // If the user logged in successfully, then we send them to the private members-only page
         // Otherwise, we display a login failed message and show the login form again
         if($login_ok)
@@ -80,13 +72,11 @@
             // sensitive values first.
             unset($row['salt']);
             unset($row['password']);
-
             // This stores the user's data into the session at the index 'user'.
             // We will check this index on the private members-only page to determine whether
             // or not the user is logged in.  We can also use it to retrieve
             // the user's details.
             $_SESSION['user'] = $row;
-
             // Redirect the user to the private members-only page.
             header("Location: feed.php");
             die("Redirecting to: feed.php");
@@ -95,7 +85,6 @@
         {
             // Tell the user they failed
             print("Login Failed.");
-
             // Show them their username again so all they have to do is enter a new
             // password.  The use of htmlentities prevents XSS attacks.  You should
             // always use htmlentities on user submitted values before displaying them
@@ -104,10 +93,10 @@
             $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
         }
     }
-
 ?>
 
 <html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -116,50 +105,28 @@
     <meta name="description" content="A twitter remake by Michael McGovern, Zack Nathan, Surya Pandiaraju and Dennis Kavin">
     <meta name="author" content="Michael McGovern">
     <link rel="icon" href="images/favicon.ico">
-
     <title>Twitter</title>
-
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="login.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="twitter.css" rel="stylesheet">
   </head>
 
-  <!--<body>
-    <div class="container">
-      <form action="login.php" method="post" class="form-signin">
-        <h2 class="form-signin-heading">Login</h2>
-        <label for="inputEmail" class="sr-only">Username</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus value="<?php echo $submitted_username; ?>">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-
-      <form action="register.php" class="register">
-        <button class="btn btn-lg btn-primary btn-block">Register</button>
-      </form>
-    </div> --><!-- /container -->
   <body>
     <div class="container">
-      <form action="login.php" method="post" class="form-signin">
-        <h1 class="form-signin-heading">Login</h1>
-        Username:<br />
-        <input type="text" name="username" value="<?php echo $submitted_username; ?>" class="form-control" />
-        <br /><br />
-        Password:<br />
-        <input type="password" name="password" value="" class="form-control" />
-        <br /><br />
-        <button type="submit" value="Login" class="btn btn-lg btn-primary btn-block">Login</button><br />
-        <a href="register.php">Register</a>
-      </form>
+      <div class="form-group has-success">
+        <form action="login.php" method="post" class="form-signin">
+          <h1 class="form-signin-heading">Login</h1>
+          <br />
+          <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+          <br />
+          <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+          <br />
+          <button type="submit" value="Login" class="btn btn-lg btn-success btn-block">Login</button><br />
+          Need an account? <a href="register.php">Register</a>
+        </form>
+      </div>
     </div>
   </body>
 </html>
