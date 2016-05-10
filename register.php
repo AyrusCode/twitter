@@ -202,15 +202,23 @@
       <h1 class="form-signin-heading">Register</h1>
 
       <br />
+      <label for="username" class="control-label">Username</label>
       <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+      <div class="help-block">Must be alpha-numeric with no spaces, cannot be changed</div>
       <br />
+      <label for="firstname" class="control-label">First Name</label>
       <input type="text" name="firstname" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1">
       <br />
+      <label for="lastname" class="control-label">Last Name</label>
       <input type="text" name="lastname" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon1">
       <br />
+      <label for="email" class="control-label">Email</label>
       <input type="text" name="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
+      <div class="help-block">Must be a valid email address</div>
       <br />
+      <label for="password" class="control-label">Password</label>
       <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+      <div class="help-block">Must be at least 144 characters long, with uppercase and lowercase letters, numbers, punctuation, symbols, accents, unicode, and chinese characters</div>
       <br />
 
       <button type="submit" value="Register" class="btn btn-lg btn-success btn-block">Register</button><br />
