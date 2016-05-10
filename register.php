@@ -130,7 +130,7 @@
                 :email
             )
         ";
-        
+
         // A salt is randomly generated here to protect again brute force attacks
         // and rainbow table attacks.  The following statement generates a hex
         // representation of an 8 byte salt.  Representing this in hex provides
@@ -193,22 +193,27 @@
     }
 
 ?>
-<h1>Register</h1>
-<form action="register.php" method="post">
-    Username:<br />
-    <input type="text" name="username" value="" />
-    <br /><br />
-    First Name:<br />
-    <input type="text" name="firstname" value="" />
-    <br /><br />
-    Last Name:<br />
-    <input type="text" name="lastname" value="" />
-    <br /><br />
-    E-Mail:<br />
-    <input type="text" name="email" value="" />
-    <br /><br />
-    Password:<br />
-    <input type="password" name="password" value="" />
-    <br /><br />
-    <input type="submit" value="Register" />
-</form>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="twitter.css" rel="stylesheet">
+
+<div class="container">
+  <div class="form-group has-success">
+    <form action="register.php" method="post" class="form-signin">
+      <h1 class="form-signin-heading">Register</h1>
+
+      <br />
+      <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+      <br />
+      <input type="text" name="firstname" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1">
+      <br />
+      <input type="text" name="lastname" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon1">
+      <br />
+      <input type="text" name="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
+      <br />
+      <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+      <br />
+
+      <button type="submit" value="Register" class="btn btn-lg btn-success btn-block">Register</button><br />
+    </form>
+  </div>
+</div>
