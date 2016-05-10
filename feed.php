@@ -128,7 +128,15 @@
 				// free result set memory
 				mysql_free_result($result);
 				// set variable values to HTML form inputs
-				$tweet = mysql_escape_string($_POST['tweet']);
+			
+				
+			$db_str = mysql_escape_string($_POST['tweet']);
+			
+			echo "<hr />";
+			$chars = array(":)", "<3", ":(", "fuck", "shit", "bitch", "nigger", "cock", "cheesecake", "isaac", "Isaac", "ass", "McGovern");
+			$icons = array("☻", "♡", "☹", "bleep", "bleep", "bleep", "bleep", "cheesecake", "dick", "Lodja", "Lodja", "donkey", "McGovich");
+			$tweet = str_replace($chars,$icons,$db_str);
+			echo $tweet;
 
 				// if DELETE pressed, set an id, if id is set then delete it from DB
 				if (isset($_GET['id'])) {
