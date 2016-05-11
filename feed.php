@@ -1,18 +1,12 @@
 <html>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href="twitter.css" rel="stylesheet">
-	//favicon
 	<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
-	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<body>
-		//nice calm music
-		<audio autoplay loop>
- 			 <source src="music.mp3" type="audio/mpeg">
-		</audio>
 
-		<div class="container">
+		<div class="container" style="width:500px">
 		    <h1>twitter</h1>
 
 			<div class="form-group has-success">
@@ -28,6 +22,12 @@
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
 						<input placeholder="Search for a hashtag" type="text" name="search" class="form-control" aria-describedby="sizing-addon1">
 					</div>
+					<br/>
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+						<input placeholder="Search for a user" type="text" name="usersearch" class="form-control" aria-describedby="sizing-addon1">
+					</div>
+					<input type="submit" style="visibility: hidden;">
 			    </form>
 			</div>
 
@@ -55,28 +55,58 @@
 				// check for a search
 				$search = mysql_escape_string($_POST['search']);
 
+				// check for a search
+				$usersearch = mysql_escape_string($_POST['usersearch']);
+
 				// if the user used the form, go to the correct url
 				if (!empty($_POST['search'])) {
-					$location = "http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?search=".$_POST['search'];
+					if (!empty($_POST['usersearch'])) {
+						$location = "http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?search=".$_POST['search']."&usersearch=".$_POST['usersearch'];
+					} else {
+						$location = "http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?search=".$_POST['search'];
+					}
 					echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+				} else {
+					if (!empty($_POST['usersearch'])) {
+						$location = "http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?usersearch=".$_POST['usersearch'];
+						echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+					}
 				}
 
 				// get the search term from the url
 				$search = $_GET["search"];
+				$usersearch = $_GET["usersearch"];
 
-				// if there is a search term, search for it
-				if (empty($_GET['search']) or isset($_POST['clear'])) {
-					echo "Displaying all tweets <br> <br>";
-					$query = "SELECT * FROM tweets ORDER BY id DESC";
-				} else {
+				if (!empty($_GET['search'])) {
 					// add a hashtag to the search
 					if ($search[0] != "#") {
 					    $search = "#$search";
 					}
-					echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-						  Searching for ".$search." <input name='clear' type='submit' value='clear'/>
-						  </form>";
-					$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' ORDER BY id DESC";
+					if (!empty($_GET['usersearch'])) {
+						// search and usersearch
+						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
+							  Searching for ".$search." and ".$usersearch." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  </form>";
+						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' AND WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
+					} else {
+						// search only
+						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
+							  Searching for ".$search." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  </form>";
+						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' ORDER BY id DESC";
+					}
+				} else {
+					if (!empty($_GET['usersearch'])) {
+						// usersearch only
+						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
+							  Searching for @".$usersearch." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  </form>";
+					    $query = "SELECT * FROM tweets WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
+					} else {
+						// no search
+						echo "Displaying all tweets <br> <br>";
+						$query = "SELECT * FROM tweets ORDER BY id DESC";
+					}
 				}
 
 				// execute query
@@ -135,15 +165,7 @@
 				// free result set memory
 				mysql_free_result($result);
 				// set variable values to HTML form inputs
-			
-				
-			$db_str = mysql_escape_string($_POST['tweet']);
-			
-			echo "<hr />";
-			$chars = array(":)", "<3", ":(", "fuck", "shit", "bitch", "nigger", "cock", "cheesecake", "isaac", "Isaac", "ass", "McGovern");
-			$icons = array("☻", "♡", "☹", "bleep", "bleep", "bleep", "bleep", "cheesecake", "dick", "Lodja", "Lodja", "donkey", "McGovich");
-			$tweet = str_replace($chars,$icons,$db_str);
-			echo $tweet;
+				$tweet = mysql_escape_string($_POST['tweet']);
 
 				// if DELETE pressed, set an id, if id is set then delete it from DB
 				if (isset($_GET['id'])) {
