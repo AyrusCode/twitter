@@ -1,9 +1,16 @@
 <html>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href="twitter.css" rel="stylesheet">
+	//favicon
+	<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<body>
+		//nice calm music
+		<audio autoplay>
+ 			 <source src="music.mp3" type="audio/mpeg">
+		</audio>
 
 		<div class="container">
 		    <h1>twitter</h1>
