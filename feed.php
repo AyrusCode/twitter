@@ -1,13 +1,13 @@
 <html>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link href="feed.css" rel="stylesheet">
+	<link href="twitter.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<body>
 
 		<div class="container" style="width:500px">
-		    <h1>twitter</h1>
+		    <h1>relay</h1>
 
 			<div class="form-group has-success">
 			   	<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
@@ -15,7 +15,7 @@
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></span>
 						<input placeholder="What's on your mind?" type="text" name="tweet" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Go!</button>
+							<button class="btn btn-success" type="submit">Go</button>
 					    </span>
 					</div>
 					<br/>
@@ -26,7 +26,7 @@
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
 						<input placeholder="Search for a hashtag" type="text" name="search" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Go!</button>
+							<button class="btn btn-success" type="submit">Go</button>
 					    </span>
 					</div>
 					<br/>
@@ -34,7 +34,7 @@
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
 						<input placeholder="Search for a user" type="text" name="usersearch" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Go!</button>
+							<button class="btn btn-success" type="submit">Go</button>
 					    </span>
 					</div>
 					<input type="submit" style="visibility: hidden;">
@@ -47,7 +47,7 @@
 
 				if(empty($_SESSION['user'])) {
 					// If they are not loggd in, we redirect them to the login page.
-					$location = "http://" . $_SERVER['HTTP_HOST'] . "/login.php";
+					$location = "http://" . $_SERVER['HTTP_HOST'] . "/twitter/login.php";
 					echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
 					//exit;
 					die("Redirecting to login.php");
@@ -149,18 +149,21 @@
 							$row[1] = str_replace($tag, "<a href='http://localhost:8888/twitter/feed.php?search=".trim($tag, "#")."'>".$tag."</a>", $row[1]);
 						}
 
+						$writer = mysql_query("SELECT * FROM users WHERE username LIKE '%$row[2]%'") or die ("Error in query: $query. ".mysql_error());
+						$writer = mysql_fetch_row($writer);
+
 						echo "<div class='panel panel-success'>";
 							if ($row[2] == $arr[1]) {
 								echo "<div class='panel-heading'>
 									      <form action='http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?id=".$row[0]."' style='display: inline;' method='post'>
-										      @".$row[2]."
+										      <b>".$writer[2]."</b> - @".$row[2]."
 											  <button class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Remove' style='float: right;'>
 											      <span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
 											  </button>
 										  </form>
 									 </div>";
 							} else {
-								echo "<div class='panel-heading'>@".$row[2]."</div>";
+								echo "<div class='panel-heading'><b>".$writer[2]."</b> - @".$row[2]."</div>";
 							}
 							echo "<div class='panel-body'>";
 				        		echo "<div>".$row[1]."</div>";
