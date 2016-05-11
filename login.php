@@ -1,3 +1,5 @@
+
+        
 <?php
     // First we execute our common code to connection to the database and start the session
     require("common.php");
@@ -110,7 +112,7 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="twitter.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="login.css"></link>
   </head>
 
   <body>
@@ -130,3 +132,4 @@
     </div>
   </body>
 </html>
+
