@@ -10,22 +10,32 @@
 		    <h1>twitter</h1>
 
 			<div class="form-group has-success">
-			   	<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+			   	<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></span>
 						<input placeholder="What's on your mind?" type="text" name="tweet" class="form-control" aria-describedby="sizing-addon1">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="submit">Go!</button>
+					    </span>
 					</div>
+					<br/>
 			    </form>
 
 				<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
 						<input placeholder="Search for a hashtag" type="text" name="search" class="form-control" aria-describedby="sizing-addon1">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="submit">Go!</button>
+					    </span>
 					</div>
 					<br/>
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
 						<input placeholder="Search for a user" type="text" name="usersearch" class="form-control" aria-describedby="sizing-addon1">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="submit">Go!</button>
+					    </span>
 					</div>
 					<input type="submit" style="visibility: hidden;">
 			    </form>
@@ -85,9 +95,9 @@
 					if (!empty($_GET['usersearch'])) {
 						// search and usersearch
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for ".$search." and ".$usersearch." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  Searching for ".$search." and @".$usersearch." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
-						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' AND WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
+						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' AND user LIKE '%$usersearch%' ORDER BY id DESC";
 					} else {
 						// search only
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
