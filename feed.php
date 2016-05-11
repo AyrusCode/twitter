@@ -8,7 +8,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<body>
 		//nice calm music
-		<audio autoplay>
+		<audio autoplay loop>
  			 <source src="music.mp3" type="audio/mpeg">
 		</audio>
 
