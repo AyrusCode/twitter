@@ -116,15 +116,13 @@
         $query = "
             INSERT INTO users (
                 username,
-                firstname,
-                lastname,
+                display,
                 password,
                 salt,
                 email
             ) VALUES (
                 :username,
-                :firstname,
-                :lastname,
+                :display,
                 :password,
                 :salt,
                 :email
@@ -163,8 +161,7 @@
         // the salt (in its plaintext form; this is not a security risk).
         $query_params = array(
             ':username' => $_POST['username'],
-            ':firstname' => $_POST['firstname'],
-            ':lastname' => $_POST['lastname'],
+            ':display' => $_POST['display'],
             ':password' => $password,
             ':salt' => $salt,
             ':email' => $_POST['email']
@@ -204,13 +201,11 @@
       <br />
       <label for="username" class="control-label">Username</label>
       <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
-      <div class="help-block">Must be alpha-numeric with no spaces, cannot be changed</div>
+      <div class="help-block">Must be alpha-numeric with no spaces, used to identify you and cannot be changed</div>
       <br />
-      <label for="firstname" class="control-label">First Name</label>
-      <input type="text" name="firstname" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1">
-      <br />
-      <label for="lastname" class="control-label">Last Name</label>
-      <input type="text" name="lastname" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon1">
+      <label for="display" class="control-label">Display Name</label>
+      <input type="text" name="display" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1">
+      <div class="help-block">Your display name, this can be changed</div>
       <br />
       <label for="email" class="control-label">Email</label>
       <input type="text" name="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
@@ -225,4 +220,3 @@
     </form>
   </div>
 </div>
-
