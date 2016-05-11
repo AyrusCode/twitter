@@ -1,3 +1,5 @@
+
+        
 <?php
     // First we execute our common code to connection to the database and start the session
     require("common.php");
@@ -96,6 +98,7 @@
 ?>
 
 <html lang="en">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <head>
     <meta charset="utf-8">
@@ -110,14 +113,19 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="twitter.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="login.css"></link>
   </head>
 
   <body>
     <div class="container">
+   <img src="http://www.webhostingreviewjam.com/wp-content/uploads/2014/04/tree-icon-green.png"> 
+   
+      
+      <form>
       <div class="form-group has-success">
         <form action="login.php" method="post" class="form-signin">
-          <h1 class="form-signin-heading">Login</h1>
+        <font color = "FFFFFF">
+          <h1 class="form-signin-heading">Relay!</h1>
           <br />
           <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
           <br />
@@ -127,6 +135,8 @@
           Need an account? <a href="register.php">Register</a>
         </form>
       </div>
+      </form>
     </div>
   </body>
 </html>
+
