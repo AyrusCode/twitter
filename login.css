@@ -1,7 +1,9 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #CADBCB;
+  background-image: url("http://www.redpepperwallpaper.com/wp_highres/minimalism/WP9EJ2CT.jpg");
+  background-repeat:no-repeat;
+  background-size: 100% 1080px;
 }
 
 .form-signin,
