@@ -1,13 +1,13 @@
 <html>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link href="twitter.css" rel="stylesheet">
+	<link href="feed.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<body>
 
 		<div class="container" style="width:500px">
-		    <h1>relay</h1>
+		    <h1>Relay!</h1>
 
 			<div class="form-group has-success">
 			   	<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
@@ -40,7 +40,7 @@
 					<input type="submit" style="visibility: hidden;">
 			    </form>
 			</div>
-
+			<div class = "intro">
 			<?php
 				// pass in some info;
 				require("common.php");
@@ -52,7 +52,7 @@
 					//exit;
 					die("Redirecting to login.php");
 				}
-
+				
 				// To access $_SESSION['user'] values put in an array, show user his username
 				$arr = array_values($_SESSION['user']);
 				echo "<form action='logout.php' method='post'>Welcome, @".$arr[1]." <button class='btn btn-success' style='float: right;' >Log out</button></form>";
@@ -114,7 +114,7 @@
 					    $query = "SELECT * FROM tweets WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
 					} else {
 						// no search
-						echo "Displaying all tweets <br> <br>";
+						echo "Displaying all Relays<br>";
 						$query = "SELECT * FROM tweets ORDER BY id DESC";
 					}
 				}
@@ -211,6 +211,7 @@
 				mysql_close($connection);
 
 			?>
+            </div>
 
 		</div>
 
@@ -222,3 +223,4 @@
 
 	</body>
 </html>
+
