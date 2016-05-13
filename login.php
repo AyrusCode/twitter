@@ -109,17 +109,17 @@
 ?> 
 
 <div class="container">
-   <img src="http://www.webhostingreviewjam.com/wp-content/uploads/2014/04/tree-icon-green.png"> 
+   <img src="http://orig01.deviantart.net/321c/f/2013/074/2/e/phoenix_by_scourge707-d5y3wyv.png"> 
    	</div>
  <div class="Relay">
     <h1>
-<font size"500" color ="white"> Relay!</font>
+<font size"500" color ="red">Enlighten</font>
 </h1>
 </div>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
  <div class = "container2">
- <h1>Login</h1>
+ <h3>Login</h3>
 <link rel="stylesheet" type="text/css" href="login.css"></link>
 <form action="login.php" method="post"> 
 <br /> 

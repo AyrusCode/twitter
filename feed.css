@@ -1,10 +1,11 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-image: url("http://media.idownloadblog.com/wp-content/uploads/2016/02/Firewatch-Wallpaper-desktop-2560x1440-green.jpg");
-  background-repeat:no-repeat;
+  background-image: url("http://images.123hdwallpapers.com/20150719/red-forest-misty-1920x1080.jpg");
+  background-repeat:repeat;
   background-size: 100% 1080px;
-  background-color:#030;
+  background-color:rgb(255,0,51);
+  background-attachment: fixed;"
 }
 
 .form-signin,
@@ -32,6 +33,6 @@ text-align: center;
 }
 
 a {
-    color: green;
+    color: rgb(204,51,51);
 }
 

@@ -7,15 +7,15 @@
 	<body>
 
 		<div class="container" style="width:500px">
-		    <h1>Relay!</h1>
+		    <h1><font color="white">Enlighten!</font></h1>
 
-			<div class="form-group has-success">
+			<div class="form-group has-danger">
 			   	<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></span>
 						<input placeholder="What's on your mind?" type="text" name="tweet" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Go</button>
+							<button class="btn btn-danger" type="submit">Go</button>
 					    </span>
 					</div>
 					<br/>
@@ -26,7 +26,7 @@
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
 						<input placeholder="Search for a hashtag" type="text" name="search" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Go</button>
+							<button class="btn btn-danger" type="submit">Go</button>
 					    </span>
 					</div>
 					<br/>
@@ -34,7 +34,7 @@
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
 						<input placeholder="Search for a user" type="text" name="usersearch" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Go</button>
+							<button class="btn btn-danger" type="submit">Go</button>
 					    </span>
 					</div>
 					<input type="submit" style="visibility: hidden;">
@@ -55,7 +55,7 @@
 				
 				// To access $_SESSION['user'] values put in an array, show user his username
 				$arr = array_values($_SESSION['user']);
-				echo "<form action='logout.php' method='post'>Welcome, @".$arr[1]." <button class='btn btn-success' style='float: right;' >Log out</button></form>";
+				echo "<div style='color: #b30000; font-size:20pt' ><strong><center><form action='logout.php' method='post'>Welcome, @".$arr[1]." <button class='btn btn-danger' style='float: right;' >Log out</button></form></div>";
 
 				// open connection
 				$connection = mysql_connect($host, $rootusername, $rootpassword) or die ("Unable to connect!");
@@ -95,13 +95,13 @@
 					if (!empty($_GET['usersearch'])) {
 						// search and usersearch
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for ".$search." and @".$usersearch." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  Searching for ".$search." and @".$usersearch." <input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
 						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' AND user LIKE '%$usersearch%' ORDER BY id DESC";
 					} else {
 						// search only
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for ".$search." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  Searching for ".$search." <input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
 						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' ORDER BY id DESC";
 					}
@@ -109,12 +109,12 @@
 					if (!empty($_GET['usersearch'])) {
 						// usersearch only
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for @".$usersearch." <input class='btn btn-success btn-sm' name='clear' type='submit' value='clear'/>
+							  Searching for @".$usersearch." <input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
 					    $query = "SELECT * FROM tweets WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
 					} else {
 						// no search
-						echo "Displaying all Relays<br>";
+						echo "Displaying all Messages!<br>";
 						$query = "SELECT * FROM tweets ORDER BY id DESC";
 					}
 				}
@@ -152,18 +152,19 @@
 						$writer = mysql_query("SELECT * FROM users WHERE username LIKE '%$row[2]%'") or die ("Error in query: $query. ".mysql_error());
 						$writer = mysql_fetch_row($writer);
 
-						echo "<div class='panel panel-success'>";
-							if ($row[2] == $arr[1]) {
+						echo "<div class='panel panel-danger'>";
+							if ($row[2
+							] == $arr[1]) {
 								echo "<div class='panel-heading'>
 									      <form action='http://".$_SERVER['HTTP_HOST']."/twitter/feed.php?id=".$row[0]."' style='display: inline;' method='post'>
-										      <b>".$writer[2]."</b> - @".$row[2]."
-											  <button class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Remove' style='float: right;'>
+										      <b>"."@".$row[2]."
+											  <button class='btn btn-danger btn-sm' data-toggle='tooltip' data-placement='top' title='Remove' style='float: right;'>
 											      <span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
 											  </button>
 										  </form>
 									 </div>";
 							} else {
-								echo "<div class='panel-heading'><b>".$writer[2]."</b> - @".$row[2]."</div>";
+								echo "<div class='panel-heading'><b>".$row[2]."</div>";
 							}
 							echo "<div class='panel-body'>";
 				        		echo "<div>".$row[1]."</div>";
@@ -223,4 +224,3 @@
 
 	</body>
 </html>
-
