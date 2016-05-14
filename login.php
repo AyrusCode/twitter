@@ -95,14 +95,11 @@
         else 
         { 
             // Tell the user they failed 
-            print("Login Failed."); 
-             
-            // Show them their username again so all they have to do is enter a new 
-            // password.  The use of htmlentities prevents XSS attacks.  You should 
-            // always use htmlentities on user submitted values before displaying them 
-            // to any users (including the user that submitted them).  For more information: 
-            // http://en.wikipedia.org/wiki/XSS_attack 
-            $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8'); 
+        echo '<div class="warning">';
+		$result='<div class="alert alert-danger">Is there smoke in your eye? Don\'t 🔥BURN🔥 with rage, just keep ☮calm☮ and re-type your account details. #myjokesarelit #betterpunsthanmattywang😆😆😆</div>';
+		echo $result;
+		echo '</div>';
+
         } 
     } 
      
@@ -113,13 +110,13 @@
    	</div>
  <div class="Relay">
     <h1>
-<font size"500" color ="red">Enlighten</font>
+<center> <font size"500" color ="red">Enlighten!</font> </center>
 </h1>
 </div>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
  <div class = "container2">
- <h3>Login</h3>
+ <font color ="orange"><h3>Login</h3></font>
 <link rel="stylesheet" type="text/css" href="login.css"></link>
 <form action="login.php" method="post"> 
 <br /> 
@@ -129,8 +126,11 @@
 <br />   
     <input type="password" name="password" value="" class="form-control" placeholder="Password" aria-describedby="sizing-addon1"/> 
     <br /><br /> 
-    <input type="submit" value="Login" /> 
+   
+   <center> <button class="button" style="vertical-align:middle"><span>Enter the Firepit</span> </button></center>
+
 </form> 
 
-<a href="register.php">Register</a>
+<a href="register.php"><strong><span style="color:white">Don't have an account? Register here!</span><br /></a>
+<button class="button2" value="About/Help" class="homebutton" id="btnHome" onClick="Javascript:window.location.href = 'about.php';"> <span style="font-size:18px">About/Help</span></button>
 </div>

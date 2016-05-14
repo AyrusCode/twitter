@@ -1,18 +1,26 @@
 <html>
+<script src="js/jquery.js"></script>
+<script  src="js/jquery.emotions.js"> </script>
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href="feed.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<body>
-
-		<div class="container" style="width:500px">
+<div class="heading">
 		    <h1><font color="white">Enlighten!</font></h1>
+            </div>
+		<div class="container" style="width:500px">
+        <div class="phoenix">
+  			 <img src="http://orig01.deviantart.net/321c/f/2013/074/2/e/phoenix_by_scourge707-d5y3wyv.png"> 
+   		</div>
+        
 
 			<div class="form-group has-danger">
 			   	<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
 					<div class="input-group input-group-lg">
-						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></span>
+						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></span>
 						<input placeholder="What's on your mind?" type="text" name="tweet" class="form-control" aria-describedby="sizing-addon1">
 						<span class="input-group-btn">
 							<button class="btn btn-danger" type="submit">Go</button>
@@ -42,6 +50,7 @@
 			</div>
 			<div class = "intro">
 			<?php
+			
 				// pass in some info;
 				require("common.php");
 
