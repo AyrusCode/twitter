@@ -1,48 +1,47 @@
-<!doctype html><head>
-<meta charset="utf-8">
+<html>
 
-<!-- the title tag should be 60 characters or less -->
-<title>About <i>Relay</i> </title>
+    <head>
+        <title>About Enlighten</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="enlighten.css">
+    </head>
 
+    <body background="resources/sky.png">
+        <div class="container">
+            <img width=250px height=150px src="resources/phoenix.png">
 
-<!-- meta description must be limited to 160 characters or less -->
+            <div>
+                <h1><font color="white">Enlighten?</font></h1>
+            </div>
 
-<meta name="<i>Relay</i> description" content="About our Twitter project.">
+            <br>
+            <div class="container2">
 
+                <font color ="white">
+                    <h2>About</h2>
 
-<meta name="author" content="Denis Khavin">
-</head>
-<style>
-div.headers {
-    background-color:orange;
-    color:white;
-    margin:20px;
-    padding:20px;
-}
-</style>
-<body>
-   <h1> <b> <center> About <i>Relay</i> </center> </b> </h1>
-   <div class="headers">
-   <h2> What is Enlighten!? </h2>
-   <p1> <i>Enlighten</i> is a project we have been working on in our Grade 10 computer science class.</br>
-        We started off with a table and a database and edit the sample code until we could </br>
-        add "tweets", add/search hashtags, and search users. etc. Tools used were IDEs such as Atom and Adobe</br>
-        Dreamweaver CS6. In terms of programming languages used, we used CSS, HTML, and PHP to do all of our</br>
-        editing/programming. </br>
-   </p1>
-  </div>
-  <div class="headers">
-  <h3> Who are the creators of <i>Relay</i>? </h3>
-  <p2> <i>Relay</i> was created by Zack Nathan, Surya Pandiaraju, Michael McGovern, and Denis Khavin. </br></p2>
-  <p2> Contact us Here: Zack Nathan - zack.nathan@gmail.com </br></p2>
-  </p3>
-  </div>
-  <br>
-  <h3> About Zach Nathan </h3>
+                    <p style="text-align: left;">
+                        Enlighten is a project we have been working on in our Grade 10 computer science class.
+                        We started off with a table and a database and edit the sample code until we could
+                        add "tweets", add/search hashtags, and search users. etc. Tools used were IDEs such as Atom and Adobe
+                        Dreamweaver CS6. In terms of programming languages used, we used CSS, HTML, and PHP to do all of our
+                        editing/programming.
+                    </p>
 
+                    <h2>Developers</h2>
 
+                    <p style="text-align: left;">
+                        Zack Nathan: zack.nathan@ucc.on.ca<br>
+                        Surya Pandiaraju: surya.pandiaraju@ucc.on.ca<br>
+                        Michael McGovern: michael.mcGovern@ucc.on.ca<br>
+                        Denis Khavin: denis.khavin@ucc.on.ca<br>
+                    </p>
 
-
-</body>
+                </font>
+                <a href="login.php"><strong><span style="color:white">Back to the login page</span><br /></a>
+                <a href="https://github.com/ZackNathan/twitter"><strong><span style="color:white">Check out our github repository</span><br /></a>
+            </div>
+        </div>
+    </body>
 </html>
-
