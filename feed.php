@@ -1,56 +1,61 @@
 <html>
-<script src="js/jquery.js"></script>
-<script  src="js/jquery.emotions.js"> </script>
+	<head>
+		<title>Enlighten!</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link href="feed.css" rel="stylesheet">
-	<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<body>
-<div class="heading">
-		    <h1><font color="white">Enlighten!</font></h1>
-            </div>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.emotions.js"> </script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link href="enlighten.css" rel="stylesheet">
+		<link rel="icon" type="image/png" href="http://static.php.net/www.php.net/favicon.ico" />
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	</head>
+
+	<body background="resources/sky.png">
 		<div class="container" style="width:500px">
-        <div class="phoenix">
-  			 <img src="http://orig01.deviantart.net/321c/f/2013/074/2/e/phoenix_by_scourge707-d5y3wyv.png"> 
-   		</div>
-        
+			<img width=250px height=150px src="resources/phoenix.png">
+			<div>
+				<h1><font color="white">Enlighten!</font></h1>
+			</div>
+			<br>
 
 			<div class="form-group has-danger">
-			   	<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
+
+				<form action="<?=$_SERVER['PHP_SELF']?>" style='display:inline;' method="post">
+
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></span>
 						<input placeholder="What's on your mind?" type="text" name="tweet" class="form-control" aria-describedby="sizing-addon1">
-						<span class="input-group-btn">
-							<button class="btn btn-danger" type="submit">Go</button>
-					    </span>
+						<span class="input-group-btn"><button class="btn btn-danger" type="submit">Go</button></span>
 					</div>
 					<br/>
-			    </form>
+
+				</form>
 
 				<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
 						<input placeholder="Search for a hashtag" type="text" name="search" class="form-control" aria-describedby="sizing-addon1">
-						<span class="input-group-btn">
-							<button class="btn btn-danger" type="submit">Go</button>
-					    </span>
+						<span class="input-group-btn"><button class="btn btn-danger" type="submit">Go</button></span>
 					</div>
+
 					<br/>
+
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
 						<input placeholder="Search for a user" type="text" name="usersearch" class="form-control" aria-describedby="sizing-addon1">
-						<span class="input-group-btn">
-							<button class="btn btn-danger" type="submit">Go</button>
-					    </span>
+						<span class="input-group-btn"><button class="btn btn-danger" type="submit">Go</button></span>
 					</div>
+
 					<input type="submit" style="visibility: hidden;">
-			    </form>
+				</form>
 			</div>
-			<div class = "intro">
+
 			<?php
-			
+
 				// pass in some info;
 				require("common.php");
 
@@ -61,10 +66,10 @@
 					//exit;
 					die("Redirecting to login.php");
 				}
-				
+
 				// To access $_SESSION['user'] values put in an array, show user his username
 				$arr = array_values($_SESSION['user']);
-				echo "<div style='color: #b30000; font-size:20pt' ><strong><center><form action='logout.php' method='post'>Welcome, @".$arr[1]." <button class='btn btn-danger' style='float: right;' >Log out</button></form></div>";
+				echo "<div style='color: #FFFFFF; font-size:20pt' ><strong><center><form style='display:inline;' action='logout.php' method='post'>Welcome, @".$arr[1]." <button class='btn btn-danger' style='float: right;' >Log out</button></form></div>";
 
 				// open connection
 				$connection = mysql_connect($host, $rootusername, $rootpassword) or die ("Unable to connect!");
@@ -104,13 +109,13 @@
 					if (!empty($_GET['usersearch'])) {
 						// search and usersearch
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for ".$search." and @".$usersearch." <input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
+							  <span style='color: #FFFFFF;'>Searching for ".$search." and @".$usersearch." </span><input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
 						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' AND user LIKE '%$usersearch%' ORDER BY id DESC";
 					} else {
 						// search only
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for ".$search." <input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
+							  <span style='color: #FFFFFF;'>Searching for ".$search." </span><input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
 						$query = "SELECT * FROM tweets WHERE contents LIKE '%$search%' ORDER BY id DESC";
 					}
@@ -118,15 +123,17 @@
 					if (!empty($_GET['usersearch'])) {
 						// usersearch only
 						echo "<form method='post' action=".$_SERVER['PHP_SELF'].">
-							  Searching for @".$usersearch." <input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
+							  <span style='color: #FFFFFF;'>Searching for @".$usersearch." </span><input class='btn btn-danger btn-sm' name='clear' type='submit' value='clear'/>
 							  </form>";
 					    $query = "SELECT * FROM tweets WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
 					} else {
 						// no search
-						echo "Displaying all Messages!<br>";
+						echo "<span style='color: #FFFFFF;'>Displaying all Messages!</span>";
 						$query = "SELECT * FROM tweets ORDER BY id DESC";
 					}
 				}
+
+				echo "<br><br>";
 
 				// execute query
 				$result = mysql_query($query) or die ("Error in query: $query. ".mysql_error());
@@ -173,11 +180,11 @@
 										  </form>
 									 </div>";
 							} else {
-								echo "<div class='panel-heading'><b>".$row[2]."</div>";
+								echo "<div class='panel-heading'><b>@".$row[2]."</div>";
 							}
 							echo "<div class='panel-body'>";
 				        		echo "<div>".$row[1]."</div>";
-								echo "<div>".date('F j, g:i a', strtotime($row[3]))."</div>";
+								echo "<div style='padding-top:4px;'><span style='font-weight:normal; font-size:12px;'>".date('F j, g:i a', strtotime($row[3]))."</span></div>";
 							echo "</div>";
 						echo "</div>";
 		    		}
@@ -221,7 +228,6 @@
 				mysql_close($connection);
 
 			?>
-            </div>
 
 		</div>
 
@@ -230,6 +236,6 @@
 				$('[data-toggle="tooltip"]').tooltip();
 			});
 		</script>
-
 	</body>
+
 </html>
