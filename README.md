@@ -1,3 +1,7 @@
+#Important Note
+###Nothing will work if you don't do this
+After you download, move this folder into the root directory of htdocs, and rename the folder to "twitter"
+
 ###~~twitter~~
 
 ###~~forest~~
