@@ -1,3 +1,10 @@
+<!--
+    Enlighten: common.php
+    This page connects Enlighten to the SQL database
+    Created by Zack Nathan, Denis Khavin, Surya Pandiaraju, Michael McGovern, and Mark Hoel
+    Created and last edited in May 2016
+-->
+
 <?php
 
     // These variables define the connection information for your MySQL database
