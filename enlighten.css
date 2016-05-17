@@ -1,9 +1,18 @@
+/*
+    Enlighten: enlighten.css
+    This document contains the CSS for the entire website
+    Created by Zack Nathan, Denis Khavin, Surya Pandiaraju, Michael McGovern, and Mark Hoel
+    Created and last edited in May 2016
+*/
+
 html {
+    /* Helps with scrolling */
     overflow: hidden;
     height: 100%;
 }
 
 body {
+    /* Padding on the edges and help with scrolling */
     height: 100%;
     overflow: auto;
     padding-top: 40px;
@@ -13,14 +22,17 @@ body {
 }
 
 a {
+    /* Links are red */
     color: rgb(204,51,51);
 }
 
 .container {
+    /* Text in a container is centered by default */
     text-align: center;
 }
 
-.container2 {
+.redbox {
+    /* For the translucent red boxes on every page that hold the content */
     display: inline-block;
 	width: 500px;
 	background-color: rgba(200,0,0,0.4);
@@ -31,6 +43,7 @@ a {
 }
 
 .button {
+    /* For the big fancy buttons on the login and register pages */
     display: inline-block;
     border-radius: 4px;
     background-color: #f4511e;
@@ -45,6 +58,7 @@ a {
 }
 
 .button span {
+    /* For the text on the big fancy buttons on the login and register pages */
     cursor: pointer;
     display: inline-block;
     position: relative;
@@ -52,6 +66,7 @@ a {
 }
 
 .button span:after {
+    /* For the arrows on the big fancy buttons on the login and register pages */
     content: '»';
     position: absolute;
     opacity: 0;
@@ -61,11 +76,12 @@ a {
 }
 
 .button:hover span {
+    /* For the slide effect on big fancy buttons on the login and register pages */
     padding-right: 25px;
 }
 
 .button:hover span:after {
+    /* For the reverse slide effect on the big fancy buttons on the login and register pages */
     opacity: 1;
     right: 0;
 }
-
