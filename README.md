@@ -1,6 +1,10 @@
 #Important Note
-###Nothing will work if you don't do this
+###Nothing will work if you don't follow these steps
 After you download, move this folder into the root directory of htdocs, and rename the folder to "twitter"
+
+Before using the website, you must use the SQL import script
+
+Before using the SQL import script, create an empty database named "twitter"
 
 ###~~twitter~~
 
