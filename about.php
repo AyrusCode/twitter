@@ -1,3 +1,10 @@
+<!--
+    Enlighten: about.php
+    This page contains an FAQ, as well as general information about Enlighten and its developers
+    Created by Zack Nathan, Denis Khavin, Surya Pandiaraju, Michael McGovern, and Mark Hoel
+    Created and last edited in May 2016
+-->
+
 <html>
 
     <head>
@@ -5,6 +12,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="enlighten.css">
+
+        <meta charset="UTF-8">
+        <meta name="description" content="About Enlighten and FAQ">
+        <meta name="author" content="Zack, Denis, Surya, and Michael">
     </head>
 
     <body background="resources/sky.png">
@@ -16,7 +27,7 @@
             </div>
 
             <br>
-            <div class="container2">
+            <div class="redbox">
 
                 <font color ="white">
                     <h2>About</h2>
